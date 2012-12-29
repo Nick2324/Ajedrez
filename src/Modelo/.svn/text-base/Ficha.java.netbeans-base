@@ -1,0 +1,37 @@
+package Modelo;
+
+import javax.swing.ImageIcon;
+import java.awt.Canvas;
+import java.awt.Graphics;
+
+public abstract class Ficha extends Canvas{
+    protected int posicionx;
+    protected int posiciony;
+    protected boolean viva;
+    protected int bando;
+    protected ImageIcon imagen;
+    public Ficha(int posicionx,int posiciony,boolean viva,int bando,String rutaImagen){
+        this.posicionx=posicionx;
+        this.posiciony=posiciony;
+        this.viva=true;
+        this.bando=bando;
+        this.imagen=new ImageIcon(rutaImagen);
+    }
+    public void paint(Graphics g){
+g.drawRect(20, 20, 20, 30);   }
+    public abstract void mover(Ficha[][] campo, int fila, int columna);
+    public abstract boolean evaluarMovimiento(Ficha[][] campo,int fila, int columna);
+    public void comer(Ficha[][] campo,byte fila, byte columna){
+        campo[fila][columna].posicionx=-1;
+        campo[fila][columna].posiciony=-1;
+        campo[fila][columna].viva=false;
+        campo[fila][columna]=null;
+    }
+    public void setImagen(ImageIcon eimg){
+        this.imagen=eimg;
+    }
+    public ImageIcon getImagen(){
+
+    return this.imagen;}
+ 
+}

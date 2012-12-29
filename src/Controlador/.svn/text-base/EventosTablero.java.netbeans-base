@@ -1,0 +1,53 @@
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package Controlador;
+import Modelo.Campo;
+import Vista.Tablero;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import javax.swing.JPanel;
+
+/**
+ *
+ * @author oscar
+ */
+public class EventosTablero implements MouseListener{
+   Tablero tab;
+   Campo camp=new Campo();
+   static int resfila=0,rescolumna=0,clickfila=0,clickcolumna=0;
+    public EventosTablero(Tablero etab, Campo ecm){
+        this.tab=etab;
+        this.camp=ecm;
+    }
+    
+
+    public void mousePressed(MouseEvent e) {
+         clickfila=tab.getCoordenadas((JPanel)e.getComponent())[0];
+         clickcolumna=tab.getCoordenadas((JPanel)e.getComponent())[1];
+        //System.out.println(clickfila+" "+clickcolumna);
+       
+    }
+    public void mouseReleased(MouseEvent e) {
+    //System.out.println("Released:  "+resfila+" "+ rescolumna);
+    if(camp.get_Ficha(clickfila, clickcolumna)!=null && camp.get_Ficha(clickfila, clickcolumna).evaluarMovimiento(camp.get_Ficha(), resfila, rescolumna)){
+    camp.get_Ficha(clickfila, clickcolumna).mover(camp.get_Ficha(), resfila, rescolumna);
+    this.tab.get_LblImgFicha()[rescolumna][resfila].setIcon(this.tab.get_LblImgFicha()[clickfila][clickcolumna].getIcon());
+    this.tab.get_LblImgFicha()[clickfila][clickcolumna].setIcon(null);
+    //camp.imprimir_mapa();
+    
+    }}  
+    public void mouseEntered(MouseEvent e) {
+    resfila=tab.getCoordenadas((JPanel)e.getComponent())[1];
+    rescolumna=tab.getCoordenadas((JPanel)e.getComponent())[0];
+    }
+    public void mouseExited(MouseEvent e) {}
+    public void mouseClicked(MouseEvent e) {}
+
+    
+
+
+}

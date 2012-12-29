@@ -1,0 +1,50 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package Modelo;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author oscar
+ */
+public class Apprey {
+        static Ficha [][] tablero =new Ficha[8][8];
+
+
+    static void imprimir_mapa(){
+        for(int i=0;i<8;i++)
+        {
+            for(int j=0;j<8;j++)
+        {
+            if(tablero[i][j]==null){
+            System.out.print(i+""+j+" ");
+            }
+            else{
+            System.out.print("RR ");
+
+            }
+        }
+            System.out.println("");
+
+        }
+    }
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+    Scanner lector =new Scanner(System.in);
+    int posx = 0,posy=0;
+    Ficha torre1= new Rey(7,4,true,1);
+    tablero[7][4]=torre1;
+    while(posx!=55){
+    posx=lector.nextInt();
+    posy=lector.nextInt();
+    torre1.mover(tablero, posy, posx);
+    imprimir_mapa();
+    }}
+
+}

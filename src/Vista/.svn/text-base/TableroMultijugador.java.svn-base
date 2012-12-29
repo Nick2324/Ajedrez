@@ -1,0 +1,95 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package Vista;
+
+import Controlador.EventosTablero;
+import Modelo.Caballo;
+import Modelo.Campo;
+import Modelo.Rey;
+import Modelo.Torre;
+import java.awt.*;
+import java.awt.GridLayout;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+/**
+ *
+ * @author oscar
+ */
+public class Tablero extends JFrame{
+    private JPanel tablero[][]=new JPanel[8][8];
+    private JLabel lblimgficha[][]=new JLabel[8][8];
+    Campo camp=new Campo();
+    private EventosTablero eventos=new EventosTablero(this,camp);
+
+    public Tablero(){
+        // campo
+        camp.get_Ficha()[7][0]=new Torre(7,0,true,1);
+        camp.get_Ficha()[7][7]=new Torre(7,7,true,1);
+        camp.get_Ficha()[7][1]=new Caballo(7,1,true,1);
+        camp.get_Ficha()[7][6]=new Caballo(7,6,true,1);
+        camp.get_Ficha()[7][4]=new Rey(7,4,true,1);
+
+
+    // Generando las casillas
+        
+    this.setLayout(new GridLayout(8,8));
+    this.setBackground(Color.WHITE);
+    for (int i = 0; i < 8; i++){
+            for (int j = 0; j < 8; j++){
+                tablero[i][j]=new JPanel();
+                lblimgficha[i][j]=new JLabel();
+                if(j%2!=0 && i%2==0){
+                  tablero[i][j].setBackground(Color.BLACK);
+                  lblimgficha[i][j].setBackground(Color.BLACK);
+                }
+                if(i%2!=0 && j%2==0){
+                  tablero[i][j].setBackground(Color.BLACK);
+                  lblimgficha[i][j].setBackground(Color.BLACK);
+                }
+                tablero[i][j].addMouseListener(this.eventos);
+                
+            }
+    }
+
+    // anadiendo las fichas al tablero
+    for(int i=0;i<8;i++){
+    for(int j=0;j<8;j++){
+    if(camp.get_Ficha(i, j)!=null){
+    lblimgficha[i][j].setIcon(camp.get_Ficha(i ,j).getImagen());
+    }}}
+for(int i=0;i<8;i++){
+    for(int j=0;j<8;j++){
+
+        tablero[i][j].add(this.lblimgficha[i][j]);
+        this.add(tablero[i][j]);
+    }
+}
+    /// Caracteristicas de la ventana
+    this.setVisible(true);
+    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    this.setTitle("Chess Box");
+    this.setSize(760,760);
+    }
+    public JLabel[][] get_LblImgFicha(){
+return this.lblimgficha;
+}
+        public int[] getCoordenadas(JPanel campo) {
+        int [] coordenadas = new int[2];
+        for (int i=0; i < 8; i++) {
+            for (int j=0; j < 8; j++) {
+                if (this.tablero[i][j] == campo) {
+                    coordenadas[0] = i;
+                    coordenadas[1] = j;
+                }
+            }
+        }
+        return coordenadas;
+    }
+
+
+  }

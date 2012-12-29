@@ -1,0 +1,51 @@
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package Modelo;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author oscar
+ */
+public class Appcaballo{
+    static Ficha [][] tablero =new Ficha[8][8];
+
+
+    static void imprimir_mapa(){
+        for(int i=0;i<8;i++)
+        {
+            for(int j=0;j<8;j++)
+        {
+            if(tablero[i][j]==null){
+            System.out.print(i+""+j+" ");
+            }
+            else{
+            System.out.print(" C ");
+
+            }
+        }
+            System.out.println("");
+
+        }
+    }
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+    Scanner lector =new Scanner(System.in);
+    int posx = 0,posy=0;
+    Ficha caballo= new Caballo(7,1,true,1);
+    tablero[7][1]=caballo;
+    while(posx!=55){
+    posx=lector.nextInt();
+    posy=lector.nextInt();
+    caballo.mover(tablero, posy, posx);
+    imprimir_mapa();
+    }}
+
+}

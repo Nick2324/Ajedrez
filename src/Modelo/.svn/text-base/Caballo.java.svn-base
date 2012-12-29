@@ -1,0 +1,81 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package Modelo;
+
+/**
+ *
+ * @author oscar
+ */
+public class Caballo extends Ficha{
+
+    public Caballo (int posicionx, int posiciony,boolean viva, int bando){
+        super(posicionx,posiciony,viva,bando,"Caballo.png");
+    }
+
+
+
+    @Override
+    public void mover(Ficha[][] campo, int fila, int columna) {
+    if(evaluarMovimiento(campo,fila,columna)){
+     campo[this.posicionx][this.posiciony]=null;
+    //System.out.println("Posicion anterior: "+this.posicionx+this.posiciony);
+    campo[columna][fila]=this;
+    this.posicionx=columna;
+    this.posiciony=fila;
+
+    }
+    else{
+    System.out.println("No se puede mover");}
+    }
+
+    @Override
+    public boolean evaluarMovimiento(Ficha[][] campo,int fila, int columna) {
+boolean resultado = false;
+if(fila<0 || fila>7 ||columna<0 || columna>7 ){
+    resultado =false;
+}
+if(this.posicionx-2==columna && fila==this.posiciony+1){
+
+   resultado=true;
+}
+if(this.posicionx+2==columna && fila==this.posiciony-1){
+
+   resultado=true;
+}
+if(this.posicionx+2==columna && fila==this.posiciony+1){
+
+   resultado=true;
+}
+if(this.posicionx-2==columna && fila==this.posiciony-1){
+
+   resultado=true;
+}
+if(this.posicionx-1==columna && fila==this.posiciony+2){
+
+   resultado=true;
+}
+if(this.posicionx+1==columna && fila==this.posiciony-2){
+
+   resultado=true;
+}
+
+if(this.posicionx-2==columna && fila==this.posiciony+1){
+
+   resultado=true;
+}
+if(this.posicionx+1==columna && fila==this.posiciony+2){
+
+   resultado=true;
+}
+if(this.posicionx-1==columna && fila==this.posiciony-2){
+
+   resultado=true;
+}
+
+return resultado;
+    }
+
+}
