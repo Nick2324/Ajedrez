@@ -13,18 +13,17 @@ import javax.swing.JOptionPane;
 
 
 public class Puntajes{
-private ListaPuntajes l=new ListaPuntajes();
-private ArrayList<Jugador> lista =new ArrayList<Jugador>();
-private JLabel lblptjes=new JLabel("");
-private String p="";
- /**
-    *Constructor puntajes sin parámetros
-    */
-public Puntajes(){
-
-
-
-String puntajes = "";int puntos = 0;
+    private ListaPuntajes l=new ListaPuntajes();
+    private ArrayList<Jugador> lista =new ArrayList<Jugador>();
+    private JLabel lblptjes=new JLabel("");
+    private String p="";
+    
+    /**
+     * Constructor puntajes sin parámetros
+     */
+    
+    public Puntajes(){
+        String puntajes = "";int puntos = 0;
         try {
             lista = l.deserializar("Puntajes.txt");
         } catch (IOException ex) {
@@ -32,23 +31,18 @@ String puntajes = "";int puntos = 0;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Puntajes.class.getName()).log(Level.SEVERE, null, ex);
         }
-            Iterator it=lista.iterator();
-            Jugador[] j=new Jugador[lista.size()];
-            int i=0;
-            while(it.hasNext()){
-                j[i]=((Jugador)(it.next()));
+        Iterator it=lista.iterator();
+        Jugador[] j=new Jugador[lista.size()];
+        int i=0;
+        while(it.hasNext()){
+            j[i]=((Jugador)(it.next()));
             i++;
-            }
-            for(int h=0;h<lista.size();h++){
-p+=j[h].getNombre()+"     "+j[h].getPuntaje()+"\n";
-        
-
-            }
-JOptionPane.showConfirmDialog(null,p, "Puntajes", JOptionPane.DEFAULT_OPTION);
-            System.out.println(puntajes);
-
+        }
+        for(int h=0;h<lista.size();h++)
+            p+=j[h].getNombre()+"     "+j[h].getPuntaje()+"\n";
+        JOptionPane.showConfirmDialog(null,p, "Puntajes"
+                , JOptionPane.DEFAULT_OPTION);
+        System.out.println(puntajes);
     }
 
-    }
-
-
+}

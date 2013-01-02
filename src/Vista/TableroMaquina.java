@@ -1,6 +1,5 @@
 package Vista;
 
-
 import Controlador.EventosTableroMaquina;
 import Modelo.Alfil;
 import Modelo.Caballo;
@@ -11,7 +10,6 @@ import Modelo.Reina;
 import Modelo.Rey;
 import Modelo.Torre;
 import java.awt.*;
-import java.awt.GridLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -53,7 +51,6 @@ public class TableroMaquina extends JFrame  {
         for(int i=0;i<8;i++){
             camp.get_Ficha()[6][i]=new Peon(6,i,true,1,"imagenes/Peon_negro.png");
             camp.get_Ficha()[1][i]=new Peon(1,i,true,0,"imagenes/Peon_blanco.png");
-
         }
         camp.get_Ficha()[7][2]=new Alfil(7,2,true,1,"imagenes/Alfil_negro.png");
         camp.get_Ficha()[7][5]=new Alfil(7,5,true,1,"imagenes/Alfil_negro.png");
@@ -76,74 +73,76 @@ public class TableroMaquina extends JFrame  {
             for (int j = 0; j < 8; j++){
                 tablero[i][j]=new JPanel();
                 lblimgficha[i][j]=new JLabel();
-                    if(j%2!=0 && i%2==0){
+                if(j%2!=0 && i%2==0){
                     tablero[i][j].setBackground(Color.BLACK);
                     lblimgficha[i][j].setBackground(Color.BLACK);
-                    }
-                    if(i%2!=0 && j%2==0){
+                }
+                if(i%2!=0 && j%2==0){
                     tablero[i][j].setBackground(Color.BLACK);
                     lblimgficha[i][j].setBackground(Color.BLACK);
-                    }
-                    tablero[i][j].addMouseListener(this.eventos);
+                }
+                tablero[i][j].addMouseListener(this.eventos);
             }
          }
 
-            for(int i=0;i<8;i++){
-                for(int j=0;j<8;j++){
-                    if(camp.get_Ficha(i, j)!=null){
-                        lblimgficha[i][j].setIcon(camp.get_Ficha(i ,j).getImagen());
-                    }
+        for(int i=0;i<8;i++){
+            for(int j=0;j<8;j++){
+                if(camp.get_Ficha(i, j)!=null){
+                    lblimgficha[i][j].setIcon(camp.get_Ficha(i ,j).getImagen());
                 }
             }
+        }
 
-            for(int i=0;i<8;i++){
-                for(int j=0;j<8;j++){
-                    tablero[i][j].add(this.lblimgficha[i][j]);
-                    panelcentral.add(tablero[i][j]);
-                }
+        for(int i=0;i<8;i++){
+            for(int j=0;j<8;j++){
+                tablero[i][j].add(this.lblimgficha[i][j]);
+                panelcentral.add(tablero[i][j]);
             }
-            panelsuperior.add(lbltiempo);
-            panelsuperior.add(lblturno);
-            this.add(panelsuperior,BorderLayout.NORTH);
-            this.add(panelcentral,BorderLayout.CENTER);
-            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            this.setLocation(new Point(300,60));
-            this.setVisible(true);
-            this.setTitle("Chess Box");
-            this.setResizable(false);
-            this.setSize(740,740);
-            //menu
-            this.mnusalir.addActionListener(this.eventos);
-            this.menuBar.add(this.opcionesarchivoMenu);
-            this.opcionesarchivoMenu.add(this.mnusalir);
-            this.setJMenuBar(menuBar);
-          
-            panelsuperior.setBackground(new Color(0xCDEB8B));
+        }
+        panelsuperior.add(lbltiempo);
+        panelsuperior.add(lblturno);
+        this.add(panelsuperior,BorderLayout.NORTH);
+        this.add(panelcentral,BorderLayout.CENTER);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocation(new Point(300,60));
+        this.setVisible(true);
+        this.setTitle("Chess Box");
+        this.setResizable(false);
+        this.setSize(740,740);
+        //menu
+        this.mnusalir.addActionListener(this.eventos);
+        this.menuBar.add(this.opcionesarchivoMenu);
+        this.opcionesarchivoMenu.add(this.mnusalir);
+        this.setJMenuBar(menuBar);
+
+        panelsuperior.setBackground(new Color(0xCDEB8B));
 
     }
-     /**
-    *Método get Jlabelficha
-    * @return lblimgficha
-    */
-        public JLabel[][] get_LblImgFicha(){
-            return this.lblimgficha;
-        }
- /**
-    *Metodo para obtener coordenadas de un movmiento
-    * @return coordenadas
-    */
-        public int[] getCoordenadas(JPanel campo) {
-            int [] coordenadas = new int[2];
-            for (int i=0; i < 8; i++) {
-                for (int j=0; j < 8; j++) {
-                    if (this.tablero[i][j] == campo) {
-                        coordenadas[0] = i;
-                        coordenadas[1] = j;
-                    }
+    
+    /**
+     * Método get Jlabelficha
+     * @return lblimgficha
+     */
+    
+    public JLabel[][] get_LblImgFicha(){
+        return this.lblimgficha;
+    }
+    
+    /**
+     * Metodo para obtener coordenadas de un movmiento
+     * @return coordenadas
+     */
+    public int[] getCoordenadas(JPanel campo) {
+        int [] coordenadas = new int[2];
+        for (int i=0; i < 8; i++) {
+            for (int j=0; j < 8; j++) {
+                if (this.tablero[i][j] == campo) {
+                    coordenadas[0] = i;
+                    coordenadas[1] = j;
                 }
             }
-            return coordenadas;
         }
+        return coordenadas;
+    }
       
-
-   }
+}

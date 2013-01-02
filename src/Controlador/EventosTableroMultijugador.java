@@ -1,4 +1,5 @@
 package Controlador;
+
 import Modelo.Campo;
 import Modelo.Ficha;
 import Modelo.Reloj;
@@ -33,20 +34,23 @@ public class EventosTableroMultijugador implements MouseListener,ActionListener{
     }
 
     public void mouseReleased(MouseEvent e) {
-        if(camp.get_Ficha(clickfila, clickcolumna)!=null && tab.getReloj().getTurno()%2!=0 && camp.get_Ficha(clickfila, clickcolumna).getBando()==0){
-         }
-        else if(camp.get_Ficha(clickfila, clickcolumna)!=null && tab.getReloj().getTurno()%2==0 && camp.get_Ficha(clickfila, clickcolumna).getBando()==1){
-        JOptionPane.showConfirmDialog(null,"No es su turno", "Error", JOptionPane.DEFAULT_OPTION);
-        }
-
-        else{
+        if(camp.get_Ficha(clickfila, clickcolumna)!=null && 
+                tab.getReloj().getTurno()%2!=0 && 
+                camp.get_Ficha(clickfila, clickcolumna).getBando()==0){
+        }else if(camp.get_Ficha(clickfila, clickcolumna)!=null &&
+                tab.getReloj().getTurno()%2==0 &&
+                camp.get_Ficha(clickfila, clickcolumna).getBando()==1){
+                JOptionPane.showConfirmDialog(null,"No es su turno", 
+                        "Error", JOptionPane.DEFAULT_OPTION);
+        }else{
             Ficha[][] campoAlterno=new Ficha[8][8];
             for(int i=0;i<8;i++)
                 for(int j=0;j<8;j++)
                     campoAlterno[i][j]=camp.get_Ficha(i,j);
 
         if(camp.get_Ficha(clickfila, clickcolumna)!=null ){
-            campoAlterno[clickfila][clickcolumna].mover(campoAlterno, resfila, rescolumna,muertas);
+            campoAlterno[clickfila][clickcolumna].mover(campoAlterno, 
+                    resfila, rescolumna,muertas);
             boolean cambioCampo=false;
             for(int i=0;i<8;i++)
                 for(int j=0;j<8;j++)
@@ -65,13 +69,10 @@ public class EventosTableroMultijugador implements MouseListener,ActionListener{
                 camp.imprimir_mapa();
                 tab.getReloj().turno_nuevo();
             }
+        }else
+              JOptionPane.showConfirmDialog(null,"Movimiento inválido",
+                      "Error", JOptionPane.DEFAULT_OPTION);
         }
-        else{
-                        JOptionPane.showConfirmDialog(null,"Movimiento inválido", "Error", JOptionPane.DEFAULT_OPTION);
-
-        }
-        }
-
     }
 
     public void mouseEntered(MouseEvent e) {
@@ -80,13 +81,12 @@ public class EventosTableroMultijugador implements MouseListener,ActionListener{
     }
 
     public void mouseExited(MouseEvent e) {}
+    
     public void mouseClicked(MouseEvent e) {}
 
     public void actionPerformed(ActionEvent e) {
-    this.tab.dispose();
-    new Principal();
+        this.tab.dispose();
+        new Principal();
     }
-
-
-
+    
 }
